@@ -162,7 +162,7 @@ To Test the REST Endpoints.
 [{"name":"someEngine"}]
 ```
 
-##User Interface
+## User Interface
 
 We will now use a UI to interface with this REST API.  It will retrieve the current settings, and display them as current values in the UI.  It will then display choices available per the Camunda BPM documentation, then post the changes to the REST API to setConfig.
 
