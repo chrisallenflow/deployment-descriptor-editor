@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1p0p2ns" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.1.1">
+  <bpmn:process id="testSetYamlProperty" name="Test Set Yaml Property" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0ydo356</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_1tgctl3">
+      <bpmn:incoming>Flow_037l943</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_037l943" sourceRef="Activity_1r26g75" targetRef="Event_1tgctl3" />
+    <bpmn:serviceTask id="Activity_1r26g75" name="Use SetProp" camunda:delegateExpression="#{setProp}">
+      <bpmn:incoming>Flow_0ydo356</bpmn:incoming>
+      <bpmn:outgoing>Flow_037l943</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0ydo356" sourceRef="StartEvent_1" targetRef="Activity_1r26g75" />
+    <bpmn:textAnnotation id="TextAnnotation_1r43wbe">
+      <bpmn:text>Start process with Tasklist</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1ox2xo4" sourceRef="StartEvent_1" targetRef="TextAnnotation_1r43wbe" />
+    <bpmn:textAnnotation id="TextAnnotation_1ycang1">
+      <bpmn:text>Add value of "process-engine-name" to "someEngine"</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0tgd5ng" sourceRef="Activity_1r26g75" targetRef="TextAnnotation_1ycang1" />
+    <bpmn:textAnnotation id="TextAnnotation_1avmctf">
+      <bpmn:text>Stop/Start server, then check:
+
+http://localhost:8080/engine-rest/engine</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_1j1sog9" sourceRef="Event_1tgctl3" targetRef="TextAnnotation_1avmctf" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="testSetYamlProperty">
+      <bpmndi:BPMNShape id="TextAnnotation_1r43wbe_di" bpmnElement="TextAnnotation_1r43wbe">
+        <dc:Bounds x="160" y="100" width="100" height="40" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ycang1_di" bpmnElement="TextAnnotation_1ycang1">
+        <dc:Bounds x="290" y="97" width="208" height="46" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1avmctf_di" bpmnElement="TextAnnotation_1avmctf">
+        <dc:Bounds x="530" y="120" width="230" height="54" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_037l943_di" bpmnElement="Flow_037l943">
+        <di:waypoint x="390" y="240" />
+        <di:waypoint x="492" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ydo356_di" bpmnElement="Flow_0ydo356">
+        <di:waypoint x="208" y="240" />
+        <di:waypoint x="290" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="172" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1be00h7_di" bpmnElement="Activity_1r26g75">
+        <dc:Bounds x="290" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1tgctl3_di" bpmnElement="Event_1tgctl3">
+        <dc:Bounds x="492" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1ox2xo4_di" bpmnElement="Association_1ox2xo4">
+        <di:waypoint x="190" y="222" />
+        <di:waypoint x="190" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0tgd5ng_di" bpmnElement="Association_0tgd5ng">
+        <di:waypoint x="340" y="200" />
+        <di:waypoint x="340" y="143" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1j1sog9_di" bpmnElement="Association_1j1sog9">
+        <di:waypoint x="520" y="225" />
+        <di:waypoint x="554" y="174" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
