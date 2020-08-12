@@ -189,3 +189,7 @@ npm start
 ```
 
 The UI will be available on [`localhost:3000`](http://localhost:3000).
+
+## Future Updates
+
+1. In order to be able to distribute properties in a flexible manner across multiple descriptor files depending on platform, we will require a single universal JSON format for this web app that represents all possible descriptor file combinations.  This will simply be a list of all properties currently set, excluding defaults not set.  Currently we are marshalling/unmarshalling the application.yaml in a Spring Boot application to prove the concept.
