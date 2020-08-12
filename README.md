@@ -1,6 +1,6 @@
 # Camunda Hackdays - Summer 2020
 
-## Project:  Deployment Descriptor Editor
+## Project: Deployment Descriptor Editor
 
 ## Introduction
 
@@ -41,7 +41,7 @@ Chris will create REST endpoints. One for getting the latest application.yaml pa
 
 Other volunteers/participants that join the project will help either Andreas or Chris on the front end/back end work, respectively.
 
-Focus will start with:  https://docs.camunda.org/manual/latest/user-guide/spring-boot-integration/configuration/#camunda-engine-properties 
+Focus will start with: https://docs.camunda.org/manual/latest/user-guide/spring-boot-integration/configuration/#camunda-engine-properties
 
 ## Prerequisites
 
@@ -51,6 +51,7 @@ Focus will start with:  https://docs.camunda.org/manual/latest/user-guide/spring
 ## JSON Payload Example
 
 This is what the application.yaml looks like when parsed by Jackson libraries to be JSON. I see no reason why we cannot just use this as the payload back/forth from the UI.
+
 ```json
 {
   "spring.datasource": {
@@ -76,6 +77,7 @@ This is what the application.yaml looks like when parsed by Jackson libraries to
 ```
 
 In this example we have three prefix hierarchy examples.
+
 1. **camunda.bpm**: setting the “process-engine-name” property.
 2. **camunda.bpm.admin-user**: setting “id”, “password”, “firstName”, “lastName”
 3. **camunda.bpm.filter**: setting the “create” property.
@@ -94,19 +96,20 @@ This will return the application.yaml as a JSON file
 
 POST http://localhost:8080/setConfig
 
-POST payload is the application.yaml as a JSON file.  The JSON will be returned to YAML and written to the application.yaml file.
+POST payload is the application.yaml as a JSON file. The JSON will be returned to YAML and written to the application.yaml file.
 
 To Test the REST Endpoints.
 
-1. Start server with IDE or maven :  mvn spring-boot:run 
+1. Start server with IDE or maven : mvn spring-boot:run
 
-2. Use the Camunda REST API to get the engine name:  http://localhost:8080/engine-rest/engine .  You should get something like : 
-   
+2. Use the Camunda REST API to get the engine name: http://localhost:8080/engine-rest/engine . You should get something like :
+
 ```json
-[{"name":"default"}]
+[{ "name": "default" }]
 ```
 
 3. Get JSON by calling http://localhost:8080/getConfig . You should get something like this:
+
 ```json
 {
   "spring.datasource": {
@@ -129,6 +132,7 @@ To Test the REST Endpoints.
   "server.port": 8080
 }
 ```
+
 4. Add reference in the JSON to a new process engine named "someEngine", like this:
 
 ```json
@@ -154,16 +158,34 @@ To Test the REST Endpoints.
   "server.port": 8080
 }
 ```
+
 5. Make a post call with Postman with the new JSON to http://localhost:8080/setConfig
 
-6. Stop/Start Camunda Spring Boot server.  When it is back up, call http://localhost:8080/engine-rest/engine . You should see your changed engine name.
+6. Stop/Start Camunda Spring Boot server. When it is back up, call http://localhost:8080/engine-rest/engine . You should see your changed engine name.
 
 ```json
-[{"name":"someEngine"}]
+[{ "name": "someEngine" }]
 ```
 
 ## User Interface
 
-We will now use a UI to interface with this REST API.  It will retrieve the current settings, and display them as current values in the UI.  It will then display choices available per the Camunda BPM documentation, then post the changes to the REST API to setConfig.
+We will now use a UI to interface with this REST API. It will retrieve the current settings, and display them as current values in the UI. It will then display choices available per the Camunda BPM documentation, then post the changes to the REST API to setConfig.
 
-((screenshot here.....))
+### Installation
+
+> Before attempting to run the UI, make sure that [Node.js v12 or higher](https://nodejs.org/en/) is installed on your machine.
+
+Just run the following three commands to start using the UI:
+
+```
+# go into the frontend directory
+cd frontend/
+
+# install all dependencies
+npm install
+
+# start the app
+npm start
+```
+
+The UI will be available on [`localhost:3000`](http://localhost:3000).

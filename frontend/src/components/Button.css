@@ -1,0 +1,25 @@
+.button {
+  display: inline-block;
+  border-radius: 3px;
+  border: unset;
+  font-weight: 500;
+  font-size: 14px;
+  font-family: inherit;
+  padding: 0.7rem 1.5rem;
+  outline: none;
+}
+
+.button.is-primary {
+  background-color: #14d890;
+  color: black;
+}
+
+.button.is-primary:hover,
+.button.is-primary:focus {
+  background-color: #11b579;
+}
+
+.button.is-primary[disabled] {
+  cursor: not-allowed;
+  background-color: #94d0ba;
+}

@@ -1,0 +1,7 @@
+.page-header {
+  margin: unset;
+  padding: 1rem 2rem;
+  background: transparent url(/orange-bg.svg) no-repeat center/cover;
+  color: white;
+  font-size: 22px;
+}
