@@ -1,0 +1,51 @@
+.form-header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  text-align: right;
+  padding: 0.7rem 2rem;
+  margin-bottom: 2rem;
+  z-index: 2;
+  border-bottom: 1px solid var(--grey-91);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: 1fr 350px 1fr;
+  justify-items: end;
+}
+
+.form-header > .group {
+  display: flex;
+  position: relative;
+}
+
+.form-header > .group > .button:first-child {
+  margin-right: 1rem;
+}
+
+.form-header > .search {
+  border: 1px solid var(--grey-96);
+  border-radius: 20px;
+  padding: 0 1rem 0 3rem;
+  font-family: inherit;
+  outline: none;
+  height: 40px;
+  margin-right: 1rem;
+  grid-column: 2;
+  appearance: none;
+  width: 100%;
+  background-color: var(--grey-96);
+  background-image: url(../icons/search.svg);
+  background-repeat: no-repeat;
+  background-position: 1rem center;
+  background-size: 18px;
+}
+
+.form-header > .search:hover {
+  background-color: var(--grey-91);
+  border-color: var(--grey-91);
+}
+
+.form-header > .search:focus {
+  background-color: white;
+  border-color: var(--grey-91);
+}

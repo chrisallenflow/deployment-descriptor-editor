@@ -1,22 +1,42 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { parse, restify } from "../utils/schema-converter";
+import metadata from "../metadata";
+import FormHeader from "./FormHeader";
 import Button from "./Button";
 import Property from "./Property";
+import { ReactComponent as IconClose } from "../icons/close.svg";
+import { SettingsContext } from "../contexts/SettingsContext";
 import "./Form.css";
 
 function Form() {
   const rawCategories = useRef();
+  const { layout } = useContext(SettingsContext);
   const [categories, setCategories] = useState([]);
+  const [error, setError] = useState("");
+  const [active, setActive] = useState("camunda.bpm");
   const [buttonText, setButtonText] = useState("Save changes");
 
   useEffect(() => {
     fetch("/getConfig")
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error(
+          `Could not connect to the server (${response.status} - ${response.statusText}). The default values will be displayed and you might not be able to update them.`
+        );
+      })
       .then((json) => {
-        const categories = parse(json);
+        const categories = parse(json, metadata);
 
         rawCategories.current = categories;
         setCategories(categories);
+      })
+      .catch((error) => {
+        setError(error.message);
+        setCategories(metadata);
+        rawCategories.current = metadata;
       });
   }, []);
 
@@ -52,7 +72,7 @@ function Form() {
     });
   };
 
-  const handleChange = (evt) => {
+  const handleSearch = (evt) => {
     const search = evt.target.value.toLowerCase().trim();
 
     const filtered = rawCategories.current.map((category) => {
@@ -69,32 +89,79 @@ function Form() {
 
     setCategories(filtered);
   };
+
+  const handleClick = (evt) => {
+    setActive(evt.target.dataset.tabKey);
+  };
+
   return (
     <form onSubmit={handleSubmit}>
-      <div className="form-header">
-        <input
-          onChange={handleChange}
-          type="search"
-          className="search-input"
-          placeholder="Search for properties..."
-        />
-        <Button disabled={buttonText !== "Save changes"} type="submit">
-          {buttonText}
-        </Button>
-      </div>
+      <FormHeader buttonText={buttonText} onSearch={handleSearch} />
 
-      {categories.map((category) => (
-        <fieldset key={category.key}>
-          <legend>{category.label}</legend>
-          {category.properties.map((property) => (
-            <Property
-              key={property.name}
-              namespace={category.key}
-              property={property}
-            />
-          ))}
-        </fieldset>
-      ))}
+      {layout === "tabs" ? (
+        <React.Fragment>
+          <div className="tabs">
+            {categories.map((category) => (
+              <button
+                className={
+                  "selector" + (active === category.key ? " is-active" : "")
+                }
+                key={category.key}
+                onClick={handleClick}
+                type="button"
+                data-tab-key={category.key}
+              >
+                {category.label}
+              </button>
+            ))}
+          </div>
+
+          <div className="tab-content">
+            {categories.map((category) => (
+              <section
+                className={
+                  "tab" + (active === category.key ? " is-active" : "")
+                }
+                key={category.key}
+              >
+                {category.properties.map((property) => (
+                  <Property
+                    key={property.name}
+                    namespace={category.key}
+                    property={property}
+                  />
+                ))}
+              </section>
+            ))}
+          </div>
+        </React.Fragment>
+      ) : (
+        categories.map((category) => (
+          <fieldset key={category.key}>
+            <legend>{category.label}</legend>
+            {category.properties.map((property) => (
+              <Property
+                key={property.name}
+                namespace={category.key}
+                property={property}
+              />
+            ))}
+          </fieldset>
+        ))
+      )}
+
+      {Boolean(error) && (
+        <div role="alert" className="error-alert">
+          <Button
+            aria-label="Close alert"
+            variant="transparent"
+            onClick={() => setError("")}
+          >
+            <IconClose />
+          </Button>
+          {error}
+        </div>
+      )}
     </form>
   );
 }

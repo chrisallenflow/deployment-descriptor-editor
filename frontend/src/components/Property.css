@@ -1,15 +1,17 @@
-.form-group {
+.property-group {
   display: grid;
   grid-template-columns: 300px auto;
   gap: 0 2rem;
   place-items: start;
-  margin-bottom: 2rem;
-  transition: opacity 0.1s linear;
+  padding: 1.5rem 2rem;
 }
 
-.form-group.is-hidden {
-  /* display: none; */
-  opacity: 0.1;
+.property-group:nth-child(even) {
+  background-color: var(--grey-98);
+}
+
+.property-group.is-hidden {
+  display: none;
 }
 
 .form-label {

@@ -1,6 +1,4 @@
-import metadata from "../metadata";
-
-export function parse(json) {
+export function parse(json, metadata) {
   const fromServer = new Map(Object.entries(json["camunda.bpm"]));
   const categories = metadata.map((category) => {
     const namespace = category.key.replace("camunda.bpm.", "");

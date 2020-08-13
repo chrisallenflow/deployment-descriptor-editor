@@ -1,8 +1,23 @@
+:root {
+  --red: #ff1e00;
+  --orange: #ff8b00;
+  --grey-98: hsl(0, 0%, 98%);
+  --grey-96: hsl(0, 0%, 96%);
+  --grey-91: hsl(0, 0%, 91%);
+  --grey-89: hsl(0, 0%, 89%);
+  --grey-80: hsl(0, 0%, 80%);
+  --grey-70: hsl(0, 0%, 70%);
+  --grey-55: hsl(0, 0%, 55%);
+  --grey-23: hsl(0, 0%, 23%);
+}
+
 body {
   margin: unset;
   font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
     "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  color: var(--grey-23);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,4 +26,9 @@ code {
   font-family: "IBM Plex Mono", Menlo, Monaco, Consolas, "Courier New",
     monospace;
   font-size: 14px;
+}
+
+svg,
+img {
+  vertical-align: middle;
 }

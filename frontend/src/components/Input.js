@@ -1,4 +1,6 @@
 import React from "react";
+import Select from "./Select";
+import Checkbox from "./Checkbox";
 import "./Input.css";
 
 function Input({ property, ...props }) {
@@ -14,17 +16,13 @@ function Input({ property, ...props }) {
       );
     case "select":
       return (
-        <select
-          className="input"
-          defaultValue={property.defaultValue}
-          {...props}
-        >
+        <Select defaultValue={property.defaultValue} {...props}>
           {property.options.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
           ))}
-        </select>
+        </Select>
       );
     case "textarea":
       return (
@@ -36,17 +34,7 @@ function Input({ property, ...props }) {
         />
       );
     case "boolean":
-      return (
-        <label className="checkbox">
-          <input
-            type="checkbox"
-            defaultChecked={property.defaultValue}
-            {...props}
-          />
-          <span className="knob"></span>
-          <span className="track"></span>
-        </label>
-      );
+      return <Checkbox defaultChecked={property.defaultValue} {...props} />;
     default:
       return (
         <input

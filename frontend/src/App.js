@@ -1,14 +1,15 @@
 import React from "react";
 import PageHeader from "./components/PageHeader";
 import Form from "./components/Form";
+import SettingsContextWrapper from "./contexts/SettingsContext";
 
 function App() {
   return (
-    <React.Fragment>
+    <SettingsContextWrapper>
       <PageHeader />
 
       <Form />
-    </React.Fragment>
+    </SettingsContextWrapper>
   );
 }
 

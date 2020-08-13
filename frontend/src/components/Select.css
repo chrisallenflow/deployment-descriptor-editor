@@ -1,4 +1,4 @@
-.input {
+.select {
   border: 1px solid var(--grey-89);
   background-color: white;
   border-radius: 3px;
@@ -8,29 +8,16 @@
   grid-column: 2 / 3;
   min-width: 300px;
   box-sizing: border-box;
+  height: 40px;
+  appearance: none;
+  background: white url(../icons/chevron-down.svg) no-repeat 96% center;
+  background-size: 18px;
 }
 
-.input:hover {
+.select:hover {
   border-color: var(--grey-80);
 }
 
-.input:focus {
+.select:focus {
   border-color: var(--orange);
-}
-
-input.input {
-  height: 40px;
-}
-
-select.input {
-  height: 40px;
-}
-
-textarea.input {
-  min-width: 40px;
-  min-width: 300px;
-}
-
-.checkbox {
-  position: relative;
 }
