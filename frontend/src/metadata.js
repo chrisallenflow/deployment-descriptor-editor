@@ -18,6 +18,13 @@ const general = [
     description:
       "Generate a unique name for the process engine (format: 'processEngine' + 10 random alphanumeric characters)",
     defaultValue: false,
+    dependency: {
+      name: "process-engine-name",
+      condition: (target) => target.checked,
+      action: "disabled",
+      description:
+        "This property can't be changed while 'generate-unique-process-engine-name' is set to true.",
+    },
   },
   {
     name: "generate-unique-process-application-name",
@@ -36,7 +43,14 @@ const general = [
     type: "select",
     description: "Camunda history level",
     defaultValue: "FULL",
-    options: ["FULL", "AUTO"],
+    options: ["NONE", "ACTIVITY", "AUDIT", "FULL", "AUTO"],
+    dependency: {
+      name: "history-level-default",
+      condition: (target) => target.value !== "AUTO",
+      action: "disabled",
+      description:
+        "This property can't be changed while 'history-level' is not set to AUTO.",
+    },
   },
   {
     name: "history-level-default",

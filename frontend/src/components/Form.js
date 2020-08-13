@@ -1,18 +1,16 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { parse, restify } from "../utils/schema-converter";
-import metadata from "../metadata";
+import { parse, restify, updateDependencies } from "../utils/schema-converter";
 import FormHeader from "./FormHeader";
-import Button from "./Button";
+import withAlert from "../hocs/with-alert";
 import Property from "./Property";
-import { ReactComponent as IconClose } from "../icons/close.svg";
 import { SettingsContext } from "../contexts/SettingsContext";
+import metadata from "../metadata";
 import "./Form.css";
 
-function Form() {
+function Form({ onAlert }) {
   const rawCategories = useRef();
   const { layout } = useContext(SettingsContext);
   const [categories, setCategories] = useState([]);
-  const [error, setError] = useState("");
   const [active, setActive] = useState("camunda.bpm");
   const [buttonText, setButtonText] = useState("Save changes");
 
@@ -34,7 +32,7 @@ function Form() {
         setCategories(categories);
       })
       .catch((error) => {
-        setError(error.message);
+        onAlert(error.message);
         setCategories(metadata);
         rawCategories.current = metadata;
       });
@@ -61,15 +59,24 @@ function Form() {
     fetch("/setConfig", {
       method: "POST",
       body: JSON.stringify(json),
-    }).then((response) => {
-      if (response.ok) {
-        setButtonText("Saved!");
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(
+            `Could not update your setttings. (${response.status} - ${response.statusText}). Make sure that the server is running.`
+          );
+        }
+        setButtonText("Save changes");
 
-        setTimeout(() => {
-          setButtonText("Save changes");
-        }, 2000);
-      }
-    });
+        onAlert(
+          `Successfully updated your settings. If you changed the process engine name, you need to restart the server.`,
+          "success"
+        );
+      })
+      .catch((error) => {
+        setButtonText("Save changes");
+        onAlert(error.message);
+      });
   };
 
   const handleSearch = (evt) => {
@@ -92,6 +99,12 @@ function Form() {
 
   const handleClick = (evt) => {
     setActive(evt.target.dataset.tabKey);
+  };
+
+  const handleChange = (changed) => {
+    if (changed.dependency) {
+      setCategories(updateDependencies(categories, changed));
+    }
   };
 
   return (
@@ -129,6 +142,7 @@ function Form() {
                     key={property.name}
                     namespace={category.key}
                     property={property}
+                    onChange={handleChange}
                   />
                 ))}
               </section>
@@ -144,26 +158,14 @@ function Form() {
                 key={property.name}
                 namespace={category.key}
                 property={property}
+                onChange={handleChange}
               />
             ))}
           </fieldset>
         ))
       )}
-
-      {Boolean(error) && (
-        <div role="alert" className="error-alert">
-          <Button
-            aria-label="Close alert"
-            variant="transparent"
-            onClick={() => setError("")}
-          >
-            <IconClose />
-          </Button>
-          {error}
-        </div>
-      )}
     </form>
   );
 }
 
-export default Form;
+export default withAlert(Form);

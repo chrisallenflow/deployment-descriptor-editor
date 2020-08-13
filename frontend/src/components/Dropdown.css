@@ -24,8 +24,10 @@
 
 .dropdown-wrapper > .select {
   width: 100%;
+  margin-bottom: 1.5rem;
 }
 
-.dropdown-wrapper > .select:not(:last-child) {
-  margin-bottom: 1.5rem;
+.dropdown-wrapper > .radio-button-group {
+  display: flex;
+  margin: 0 -5px;
 }

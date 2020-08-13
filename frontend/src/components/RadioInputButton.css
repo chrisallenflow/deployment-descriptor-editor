@@ -1,0 +1,31 @@
+.radio-input > .box {
+  border: 1px solid var(--grey-89);
+  display: inline-flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+  margin: 0 5px;
+}
+
+.radio-input > .box:hover {
+  border-color: var(--grey-80);
+}
+
+.radio-input > input {
+  display: none;
+}
+
+.radio-input > input:checked + .box {
+  background-image: linear-gradient(250deg, var(--orange), var(--red));
+  color: white;
+  border-color: var(--orange);
+}
+
+.radio-input > .box > .title {
+  font-size: 14px;
+}
+
+.radio-input > .box > .description {
+  font-size: 13px;
+}

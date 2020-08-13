@@ -1,8 +1,9 @@
 import React from "react";
 import Input from "./Input";
+import { ReactComponent as IconWarning } from "../icons/alert-triangle.svg";
 import "./Property.css";
 
-function Property({ property, namespace }) {
+function Property({ property, namespace, onChange }) {
   const id = namespace + "." + property.name;
 
   return (
@@ -10,8 +11,22 @@ function Property({ property, namespace }) {
       <label className="form-label" htmlFor={id}>
         <code>{property.name}</code>
       </label>
-      <Input property={property} id={id} name={id} />
-      <p className="form-helper">{property.description}</p>
+      <Input
+        property={property}
+        id={id}
+        name={id}
+        onChange={(evt) => onChange({ ...property, target: evt.target })}
+        disabled={property.disabled}
+      />
+      <div className="form-helper">
+        <p className="message">{property.description}</p>
+        {property.disabled && (
+          <p className="warning">
+            <IconWarning width="22" height="22" />
+            {property.warning}
+          </p>
+        )}
+      </div>
     </div>
   );
 }

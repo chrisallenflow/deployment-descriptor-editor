@@ -72,3 +72,39 @@ export function restify(formData) {
 
   return json;
 }
+
+export function findProperty(categories, name) {
+  let match = [];
+
+  categories.forEach((category, categoryIndex) => {
+    const propertyIndex = category.properties.findIndex(
+      (property) => property.name === name
+    );
+
+    if (propertyIndex !== -1) {
+      match = [categoryIndex, propertyIndex];
+    }
+  });
+
+  return match;
+}
+
+export function updateDependencies(categories, changed) {
+  return categories.map((category) => {
+    const properties = category.properties.map((property) => {
+      if (property.name === changed.dependency.name) {
+        const disabled = changed.dependency.condition(changed.target);
+
+        return {
+          ...property,
+          warning: disabled ? changed.dependency.description : null,
+          disabled,
+        };
+      }
+
+      return property;
+    });
+
+    return { ...category, properties };
+  });
+}

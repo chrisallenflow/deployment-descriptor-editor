@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import Select from "./Select";
+import RadioButtonInput from "./RadioInputButton";
 import { SettingsContext } from "../contexts/SettingsContext";
 import "./Dropdown.css";
 
 function Dropdown({ isVisible, onClose }) {
-  const ref = useRef();
   const { platform, layout, dispatch } = useContext(SettingsContext);
 
   useEffect(() => {
@@ -23,10 +23,6 @@ function Dropdown({ isVisible, onClose }) {
     if (isVisible) {
       window.addEventListener("keydown", handleKeyDown);
       window.addEventListener("click", handleClick);
-
-      if (ref && ref.current) {
-        ref.current.querySelector("select").focus();
-      }
     }
 
     return () => {
@@ -40,7 +36,7 @@ function Dropdown({ isVisible, onClose }) {
   }
 
   return (
-    <div className="dropdown-wrapper" ref={ref}>
+    <div className="dropdown-wrapper">
       <h2 className="title">Settings</h2>
 
       <label htmlFor="platform" className="label">
@@ -60,36 +56,23 @@ function Dropdown({ isVisible, onClose }) {
         <option value="weblogic">Oracle Weblogic</option>
       </Select>
 
-      <label htmlFor="layout" className="label">
-        Layout:
-      </label>
-      <Select
-        id="layout"
-        defaultValue={layout}
-        onChange={(evt) =>
-          dispatch({ type: "TOGGLE_LAYOUT", payload: evt.target.value })
-        }
-      >
-        <option value="tabs">Tabs</option>
-        <option value="list">List</option>
-      </Select>
-
-      {/* <label htmlFor="tooltips" className="label">
-        Display property help as:
-      </label>
-      <Select id="tooltips" defaultValue="block">
-        <option value="overlay">Tooltip overlays</option>
-        <option value="block">Below the property</option>
-        <option value="none">Don't display them</option>
-      </Select>
-
-      <label htmlFor="search" className="label">
-        Search result highlights:
-      </label>
-      <Select id="search" defaultValue="hide">
-        <option value="fade">Fade out</option>
-        <option value="hide">Hide them</option>
-      </Select> */}
+      <label className="label">Layout:</label>
+      <div className="radio-button-group">
+        <RadioButtonInput
+          title="Tabs"
+          description="Show a tab menu to navigate categories"
+          defaultChecked={layout === "tabs"}
+          onChange={() => dispatch({ type: "TOGGLE_LAYOUT", payload: "tabs" })}
+          name="layout"
+        />
+        <RadioButtonInput
+          title="List"
+          description="Show all categories and properties in a list"
+          defaultChecked={layout === "list"}
+          onChange={() => dispatch({ type: "TOGGLE_LAYOUT", payload: "list" })}
+          name="layout"
+        />
+      </div>
     </div>
   );
 }

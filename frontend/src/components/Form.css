@@ -19,47 +19,6 @@ legend {
   color: var(--red);
 }
 
-.error-alert {
-  position: fixed;
-  bottom: 2rem;
-  right: 0;
-  max-width: 350px;
-  padding: 1rem 3rem 1rem 1rem;
-  border-radius: 3px 0 0 3px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-  transform: translateX(100%);
-  background: white url(../icons/alert-triangle.svg) no-repeat 90% 80%;
-  background-size: 60px;
-  animation: fade-in 0.4s ease-out 0.5s forwards;
-}
-
-.error-alert::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 5px;
-  border-radius: 3px 0 0 3px;
-  background: linear-gradient(to bottom, var(--orange), var(--red));
-}
-
-@keyframes fade-in {
-  from {
-    transform: translateX(100%);
-  }
-
-  to {
-    transform: translateX(0);
-  }
-}
-
-.error-alert > .button {
-  position: absolute;
-  right: 0.2rem;
-  top: 0.5rem;
-}
-
 .tabs {
   display: flex;
 }

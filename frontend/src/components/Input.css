@@ -10,6 +10,13 @@
   box-sizing: border-box;
 }
 
+.input:disabled {
+  cursor: not-allowed;
+  background-color: transparent;
+  border-color: transparent;
+  padding: unset;
+}
+
 .input:hover {
   border-color: var(--grey-80);
 }

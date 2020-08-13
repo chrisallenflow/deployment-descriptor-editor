@@ -1,6 +1,7 @@
 .checkbox > input {
   position: absolute;
   top: -9999px;
+  visibility: hidden;
 }
 
 .checkbox > input:checked + .knob {
