@@ -24,8 +24,8 @@ I doubt that we will be able to implement a fully functional prototype for this 
 
 ## Team
 
-Chris Allen - Field Ops: Consulting NA
-Andreas Remdt - Product Team: Cawemo Engineer
+- Chris Allen - Field Ops: Consulting NA
+- Andreas Remdt - Product Team: Cawemo Engineer
 
 ## Definition of Done
 
