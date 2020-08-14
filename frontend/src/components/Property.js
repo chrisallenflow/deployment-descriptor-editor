@@ -46,6 +46,7 @@ function getPropertyField(property, id, onChange) {
           type={property.type}
           onChange={onChange}
           disabled={property.disabled}
+          readOnly={property.readonly}
           id={id}
           name={id}
           defaultValue={property.defaultValue}

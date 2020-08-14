@@ -10,6 +10,16 @@
   height: 40px;
 }
 
+.input[type="number"] {
+  max-width: 200px;
+}
+
+.input[readonly] {
+  border: none;
+  padding: unset;
+  background-color: transparent;
+}
+
 .input:disabled {
   cursor: not-allowed;
   background-color: var(--grey-96);

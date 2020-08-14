@@ -5,7 +5,7 @@ import "./PageHeader.css";
 function PageHeader() {
   return (
     <header className="page-header">
-      <h1 className="title">Deployment Descriptors Editor</h1>
+      <h1 className="title">Deployment Descriptor Editor</h1>
       <a
         href="https://docs.camunda.org/manual/latest/user-guide/spring-boot-integration/configuration/#camunda-engine-properties"
         target="_blank"

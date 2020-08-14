@@ -69,7 +69,7 @@ export function convertDataType(value) {
     return false;
   }
 
-  if (Number(value) && typeof value != "boolean") {
+  if ((Number(value) && typeof value != "boolean") || value === "0") {
     return Number(value);
   }
 
@@ -80,18 +80,20 @@ export function restify(formData) {
   let json = {};
 
   for (let [key, value] of formData.entries()) {
-    value = convertDataType(value);
+    if (value !== "") {
+      value = convertDataType(value);
 
-    const [property, namespace] = key.substr(12).split(".").reverse();
+      const [property, namespace] = key.substr(12).split(".").reverse();
 
-    if (!namespace) {
-      json[property] = value;
-    } else {
-      if (!json[namespace]) {
-        json[namespace] = {};
+      if (!namespace) {
+        json[property] = value;
+      } else {
+        if (!json[namespace]) {
+          json[namespace] = {};
+        }
+
+        json[namespace][property] = value;
       }
-
-      json[namespace][property] = value;
     }
   }
 

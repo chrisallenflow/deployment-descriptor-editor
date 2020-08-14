@@ -46,8 +46,8 @@ export default {
       name: "history-level",
       type: "select",
       description: "Camunda history level",
-      defaultValue: "AUTO",
-      options: ["NONE", "ACTIVITY", "AUDIT", "FULL", "AUTO"],
+      defaultValue: "auto",
+      options: ["none", "activity", "audit", "full", "auto"],
       dependency: {
         name: "history-level-default",
         condition: (target) => target.value !== "AUTO",
@@ -61,8 +61,8 @@ export default {
       type: "select",
       description:
         "Camunda history level to use when history-level is auto, but the level can not determined automatically",
-      defaultValue: "FULL",
-      options: ["FULL", "AUTO"],
+      defaultValue: "full",
+      options: ["full", "auto"],
       depends: ["history-level"],
     },
     {
@@ -104,12 +104,14 @@ export default {
       type: "string",
       description: "Version of the process engine",
       defaultValue: "7.4.0",
+      readonly: true,
     },
     {
       name: "formatted-version",
       type: "string",
       description: "Formatted version of the process engine",
       defaultValue: "v7.4.0",
+      readonly: true,
     },
     {
       name: "deployment-resource-pattern",

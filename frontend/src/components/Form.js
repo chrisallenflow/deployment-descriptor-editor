@@ -50,6 +50,9 @@ function Form({ onAlert }) {
 
     const data = new FormData(evt.target);
 
+    data.delete("camunda.bpm.version");
+    data.delete("camunda.bpm.formatted-version");
+
     const json = {
       "spring.datasource": {
         url: "jdbc:h2:./camunda-db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE",
@@ -74,7 +77,7 @@ function Form({ onAlert }) {
         setButtonText("Save changes");
 
         onAlert(
-          `Successfully updated your settings. If you changed the process engine name, you need to restart the server.`,
+          `Successfully updated your settings. You must restart your server in order for these changes to take effect.`,
           "success"
         );
       })
