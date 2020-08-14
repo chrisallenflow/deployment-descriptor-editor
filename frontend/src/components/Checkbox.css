@@ -1,3 +1,8 @@
+.checkbox {
+  position: relative;
+  display: inline-block;
+}
+
 .checkbox > input {
   position: absolute;
   top: -9999px;
@@ -30,6 +35,7 @@
   background-color: white;
   display: block;
   transition: left 0.3s ease-out;
+  z-index: 1;
 }
 
 .checkbox > .knob::before {

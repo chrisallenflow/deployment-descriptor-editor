@@ -7,11 +7,11 @@
   border-radius: 3px 0 0 3px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   transform: translateX(100%);
-  animation: fade-in 0.4s ease-out forwards;
+  animation: slide-in 0.4s ease-out 0.1s forwards;
 }
 
 .alert.is-error {
-  background: white url(../icons/alert-triangle.svg) no-repeat 90% 80%;
+  background: white url(../icons/alert-triangle-fade.svg) no-repeat 90% 80%;
   background-size: 60px;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .alert.fade-out {
-  animation: fade-out 0.4s ease-out forwards;
+  animation: slide-out 0.4s ease-out forwards;
 }
 
 .alert::before {
@@ -48,7 +48,7 @@
   top: 0.5rem;
 }
 
-@keyframes fade-out {
+@keyframes slide-out {
   from {
     transform: translateX(0);
   }
@@ -58,11 +58,7 @@
   }
 }
 
-@keyframes fade-in {
-  from {
-    transform: translateX(100%);
-  }
-
+@keyframes slide-in {
   to {
     transform: translateX(0);
   }

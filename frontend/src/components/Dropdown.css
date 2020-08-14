@@ -12,6 +12,20 @@
   text-align: left;
 }
 
+.dropdown-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: calc(50% - 13px);
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+  background-color: white;
+  border: 1px solid transparent;
+  border-top-color: var(--grey-91);
+  border-left-color: var(--grey-91);
+}
+
 .dropdown-wrapper > .title {
   margin: 0 0 1rem;
   font-size: 20px;
@@ -19,12 +33,12 @@
 
 .dropdown-wrapper > .label {
   display: block;
+  margin-top: 1.5rem;
   margin-bottom: 0.3rem;
 }
 
 .dropdown-wrapper > .select {
   width: 100%;
-  margin-bottom: 1.5rem;
 }
 
 .dropdown-wrapper > .radio-button-group {

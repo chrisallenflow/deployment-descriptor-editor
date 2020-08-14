@@ -5,6 +5,9 @@ const SettingsContext = React.createContext();
 const INITIAL_STATE = {
   layout: localStorage.getItem("editor.layout") || "tabs",
   platform: localStorage.getItem("editor.platform") || "spring-boot",
+  helpers: localStorage.getItem("editor.helpers")
+    ? Boolean(Number(localStorage.getItem("editor.helpers")))
+    : true,
 };
 
 function reducer(state, action) {
@@ -16,6 +19,10 @@ function reducer(state, action) {
     case "SWITCH_PLATFORM":
       localStorage.setItem("editor.platform", action.payload);
       return { ...state, platform: action.payload };
+
+    case "TOGGLE_HELPERS":
+      localStorage.setItem("editor.helpers", Number(action.payload));
+      return { ...state, helpers: action.payload };
 
     default:
       return state;

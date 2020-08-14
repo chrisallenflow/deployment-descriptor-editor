@@ -10,7 +10,7 @@ fieldset:last-child {
 
 legend {
   position: sticky;
-  top: 22px;
+  top: 18px;
   font-weight: 700;
   background-color: white;
   padding: 0 0.5rem;
@@ -21,6 +21,7 @@ legend {
 
 .tabs {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .tabs > .selector {
@@ -28,17 +29,42 @@ legend {
   background: transparent;
   border: none;
   font-family: inherit;
-  padding: 1rem 0;
+  padding: 1rem 0.7rem;
   border-bottom: 1px solid var(--grey-91);
   outline: none;
+  transition: opacity 0.2s linear;
 }
 
-.tabs > .selector:hover {
-  border-bottom-color: var(--grey-55);
+.tabs > .selector.is-faded {
+  opacity: 0.4;
+}
+
+.tabs > .selector:hover,
+.tabs > .selector:focus {
+  border-bottom-color: var(--grey-80);
+  background-color: var(--grey-96);
 }
 
 .tabs > .selector.is-active {
+  background-color: var(--grey-96);
   border-bottom-color: var(--orange);
+}
+
+.tabs > .selector > .count {
+  display: inline-flex;
+  background: var(--grey-91);
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  border-radius: 10px;
+  color: var(--grey-23);
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin-left: 0.3rem;
+  transition: opacity 0.2s linear;
+  pointer-events: none;
 }
 
 .tab-content > .tab {

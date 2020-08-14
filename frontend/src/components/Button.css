@@ -37,10 +37,7 @@
 }
 
 .button.is-transparent:hover,
-.button.is-transparent:focus {
+.button.is-transparent:focus,
+.button.is-transparent.is-active {
   color: var(--grey-23);
-}
-
-button.is-transparent.is-active {
-  color: var(--orange);
 }

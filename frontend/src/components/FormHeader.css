@@ -4,13 +4,16 @@
   background-color: white;
   text-align: right;
   padding: 0.7rem 2rem;
-  margin-bottom: 2rem;
   z-index: 2;
   border-bottom: 1px solid var(--grey-91);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   display: grid;
   grid-template-columns: 1fr 350px 1fr;
   justify-items: end;
+}
+
+.form-header.has-margin {
+  margin-bottom: 2rem;
 }
 
 .form-header > .group {

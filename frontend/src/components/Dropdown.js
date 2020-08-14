@@ -1,11 +1,12 @@
 import React, { useEffect, useContext } from "react";
 import Select from "./Select";
 import RadioButtonInput from "./RadioInputButton";
+import Checkbox from "./Checkbox";
 import { SettingsContext } from "../contexts/SettingsContext";
 import "./Dropdown.css";
 
 function Dropdown({ isVisible, onClose }) {
-  const { platform, layout, dispatch } = useContext(SettingsContext);
+  const { platform, layout, helpers, dispatch } = useContext(SettingsContext);
 
   useEffect(() => {
     const handleKeyDown = (evt) => {
@@ -73,6 +74,17 @@ function Dropdown({ isVisible, onClose }) {
           name="layout"
         />
       </div>
+
+      <label htmlFor="helpers" className="label">
+        Show property descriptions:
+      </label>
+      <Checkbox
+        id="helpers"
+        defaultChecked={helpers}
+        onChange={(evt) =>
+          dispatch({ type: "TOGGLE_HELPERS", payload: evt.target.checked })
+        }
+      />
     </div>
   );
 }

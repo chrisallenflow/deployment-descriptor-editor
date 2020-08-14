@@ -12,16 +12,25 @@
 
 .input:disabled {
   cursor: not-allowed;
-  background-color: transparent;
-  border-color: transparent;
-  padding: unset;
+  background-color: var(--grey-96);
+  background-image: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.5) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.5) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 1rem 1rem;
 }
 
-.input:hover {
+.input:not(:disabled):hover {
   border-color: var(--grey-80);
 }
 
-.input:focus {
+.input:not(:disabled):focus {
   border-color: var(--orange);
 }
 
@@ -36,8 +45,4 @@ select.input {
 textarea.input {
   min-width: 40px;
   min-width: 300px;
-}
-
-.checkbox {
-  position: relative;
 }

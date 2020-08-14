@@ -45,7 +45,7 @@ export default {
       name: "history-level",
       type: "select",
       description: "Camunda history level",
-      defaultValue: "FULL",
+      defaultValue: "AUTO",
       options: ["NONE", "ACTIVITY", "AUDIT", "FULL", "AUTO"],
       dependency: {
         name: "history-level-default",

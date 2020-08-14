@@ -10,8 +10,8 @@
   background-color: var(--grey-98);
 }
 
-.property-group.is-hidden {
-  display: none;
+.property-group svg {
+  margin-left: 0.5rem;
 }
 
 .form-label {
@@ -28,19 +28,4 @@
   font-size: 13px;
   margin: 0.2rem 0 0;
   color: var(--grey-23);
-}
-
-.form-helper > .warning {
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  margin: 0.4rem 0 0;
-  color: var(--orange);
-  border: 1px solid hsl(33deg 100% 90%);
-  padding: 0.5rem;
-  border-radius: 3px;
-}
-
-.form-helper > .warning > svg {
-  margin-right: 0.5rem;
 }

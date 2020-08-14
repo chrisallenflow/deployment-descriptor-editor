@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef, useContext } from "react";
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useContext,
+  useCallback,
+} from "react";
 import { parse, restify, updateDependencies } from "../utils/schema-converter";
 import FormHeader from "./FormHeader";
 import withAlert from "../hocs/with-alert";
@@ -37,6 +43,13 @@ function Form({ onAlert }) {
         rawCategories.current = templates;
       });
   }, []);
+
+  const propertyCount = useCallback(
+    (category) => {
+      return category.properties.filter((property) => !property.hidden).length;
+    },
+    [categories]
+  );
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -116,15 +129,16 @@ function Form({ onAlert }) {
           <div className="tabs">
             {categories.map((category) => (
               <button
-                className={
-                  "selector" + (active === category.prefix ? " is-active" : "")
-                }
+                className={`selector ${
+                  active === category.prefix ? " is-active" : ""
+                }${propertyCount(category) === 0 ? " is-faded" : ""}`}
                 key={category.prefix}
                 onClick={handleClick}
                 type="button"
                 data-tab-prefix={category.prefix}
               >
-                {category.label}
+                {category.label}{" "}
+                <span className="count">{propertyCount(category)}</span>
               </button>
             ))}
           </div>
@@ -151,7 +165,10 @@ function Form({ onAlert }) {
         </React.Fragment>
       ) : (
         categories.map((category) => (
-          <fieldset key={category.prefix}>
+          <fieldset
+            className={propertyCount(category) === 0 ? "is-hidden" : ""}
+            key={category.prefix}
+          >
             <legend>{category.label}</legend>
             {category.properties.map((property) => (
               <Property
