@@ -1,7 +1,7 @@
 export function parse(json, metadata) {
   const fromServer = new Map(Object.entries(json["camunda.bpm"]));
   const categories = metadata.map((category) => {
-    const namespace = category.key.replace("camunda.bpm.", "");
+    const namespace = category.prefix.replace("camunda.bpm.", "");
 
     if (namespace === "camunda.bpm") {
       const properties = category.properties.map((property) => {

@@ -4,7 +4,7 @@ import FormHeader from "./FormHeader";
 import withAlert from "../hocs/with-alert";
 import Property from "./Property";
 import { SettingsContext } from "../contexts/SettingsContext";
-import metadata from "../metadata";
+import templates from "../templates";
 import "./Form.css";
 
 function Form({ onAlert }) {
@@ -26,15 +26,15 @@ function Form({ onAlert }) {
         );
       })
       .then((json) => {
-        const categories = parse(json, metadata);
+        const categories = parse(json, templates);
 
         rawCategories.current = categories;
         setCategories(categories);
       })
       .catch((error) => {
         onAlert(error.message);
-        setCategories(metadata);
-        rawCategories.current = metadata;
+        setCategories(templates);
+        rawCategories.current = templates;
       });
   }, []);
 
@@ -98,7 +98,7 @@ function Form({ onAlert }) {
   };
 
   const handleClick = (evt) => {
-    setActive(evt.target.dataset.tabKey);
+    setActive(evt.target.dataset.tabPrefix);
   };
 
   const handleChange = (changed) => {
@@ -117,12 +117,12 @@ function Form({ onAlert }) {
             {categories.map((category) => (
               <button
                 className={
-                  "selector" + (active === category.key ? " is-active" : "")
+                  "selector" + (active === category.prefix ? " is-active" : "")
                 }
-                key={category.key}
+                key={category.prefix}
                 onClick={handleClick}
                 type="button"
-                data-tab-key={category.key}
+                data-tab-prefix={category.prefix}
               >
                 {category.label}
               </button>
@@ -133,14 +133,14 @@ function Form({ onAlert }) {
             {categories.map((category) => (
               <section
                 className={
-                  "tab" + (active === category.key ? " is-active" : "")
+                  "tab" + (active === category.prefix ? " is-active" : "")
                 }
-                key={category.key}
+                key={category.prefix}
               >
                 {category.properties.map((property) => (
                   <Property
                     key={property.name}
-                    namespace={category.key}
+                    namespace={category.prefix}
                     property={property}
                     onChange={handleChange}
                   />
@@ -151,12 +151,12 @@ function Form({ onAlert }) {
         </React.Fragment>
       ) : (
         categories.map((category) => (
-          <fieldset key={category.key}>
+          <fieldset key={category.prefix}>
             <legend>{category.label}</legend>
             {category.properties.map((property) => (
               <Property
                 key={property.name}
-                namespace={category.key}
+                namespace={category.prefix}
                 property={property}
                 onChange={handleChange}
               />
