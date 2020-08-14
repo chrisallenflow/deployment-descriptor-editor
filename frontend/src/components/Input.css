@@ -5,9 +5,9 @@
   padding: 0 1rem;
   font-family: inherit;
   outline: none;
-  grid-column: 2 / 3;
   min-width: 300px;
   box-sizing: border-box;
+  height: 40px;
 }
 
 .input:disabled {
@@ -32,17 +32,4 @@
 
 .input:not(:disabled):focus {
   border-color: var(--orange);
-}
-
-input.input {
-  height: 40px;
-}
-
-select.input {
-  height: 40px;
-}
-
-textarea.input {
-  min-width: 40px;
-  min-width: 300px;
 }

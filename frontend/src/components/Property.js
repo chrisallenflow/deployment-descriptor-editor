@@ -1,13 +1,66 @@
 import React, { useContext } from "react";
-import Input from "./Input";
 import Tooltip from "./Tooltip";
+import Input from "./Input";
+import Select from "./Select";
+import Checkbox from "./Checkbox";
+import Textarea from "./Textarea";
 import { ReactComponent as IconWarning } from "../icons/alert-triangle.svg";
 import { SettingsContext } from "../contexts/SettingsContext";
 import "./Property.css";
 
+function getPropertyField(property, id, onChange) {
+  switch (property.type) {
+    case "select":
+      return (
+        <Select
+          id={id}
+          name={id}
+          disabled={property.disabled}
+          defaultValue={property.defaultValue}
+          options={property.options}
+          onChange={onChange}
+        />
+      );
+    case "textarea":
+      return (
+        <Textarea
+          disabled={property.disabled}
+          onChange={onChange}
+          id={id}
+          name={id}
+          defaultValue={property.defaultValue}
+        />
+      );
+    case "boolean":
+      return (
+        <Checkbox
+          id={id}
+          name={id}
+          onChange={onChange}
+          defaultChecked={property.defaultValue}
+        />
+      );
+    default:
+      return (
+        <Input
+          type={property.type}
+          onChange={onChange}
+          disabled={property.disabled}
+          id={id}
+          name={id}
+          defaultValue={property.defaultValue}
+        />
+      );
+  }
+}
+
 function Property({ property, namespace, onChange }) {
   const id = namespace + "." + property.name;
   const { helpers } = useContext(SettingsContext);
+
+  const handleChange = (evt) => {
+    onChange({ ...property, target: evt.target });
+  };
 
   return (
     <div className={"property-group" + (property.hidden ? " is-hidden" : "")}>
@@ -15,13 +68,7 @@ function Property({ property, namespace, onChange }) {
         <code>{property.name}</code>
       </label>
       <div>
-        <Input
-          property={property}
-          id={id}
-          name={id}
-          onChange={(evt) => onChange({ ...property, target: evt.target })}
-          disabled={property.disabled}
-        />
+        {getPropertyField(property, id, handleChange)}
 
         {property.disabled && (
           <Tooltip title={property.warning}>

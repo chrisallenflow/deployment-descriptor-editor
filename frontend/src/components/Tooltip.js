@@ -32,7 +32,7 @@ function withSharedState(Component) {
 }
 
 function Tooltip({ anchorEl, title }) {
-  const [position, setPosition] = useState({ top: 0, left: 0 });
+  const [, setPosition] = useState({ top: 0, left: 0 });
   const ref = useRef();
 
   useEffect(() => {
@@ -40,6 +40,7 @@ function Tooltip({ anchorEl, title }) {
       top: getTopPosition(),
       left: getLeftPosition(),
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getLeftPosition = () => {

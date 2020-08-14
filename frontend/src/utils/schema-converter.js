@@ -1,10 +1,16 @@
 export function parse(json, metadata) {
   const fromServer = new Map(Object.entries(json["camunda.bpm"]));
+  const scheduled = [];
+
   const categories = metadata.map((category) => {
     const namespace = category.prefix.replace("camunda.bpm.", "");
 
     if (namespace === "camunda.bpm") {
-      const properties = category.properties.map((property) => {
+      const properties = category.properties.map((property, index) => {
+        if (property.depends) {
+          scheduled.push([property, index]);
+        }
+
         if (fromServer.has(property.name)) {
           const defaultValue = fromServer.get(property.name);
 
@@ -18,7 +24,11 @@ export function parse(json, metadata) {
     }
 
     if (fromServer.has(namespace)) {
-      const properties = category.properties.map((property) => {
+      const properties = category.properties.map((property, index) => {
+        if (property.depends) {
+          scheduled.push([property, index]);
+        }
+
         const defaultValue = fromServer.get(namespace)[property.name];
 
         if (fromServer.get(namespace)[property.name]) {
@@ -32,6 +42,21 @@ export function parse(json, metadata) {
     }
 
     return category;
+  });
+
+  scheduled.forEach((slave) => {
+    categories.forEach((category) => {
+      const master = category.properties.find(
+        (property) => property.name === slave[0].depends[0]
+      );
+      if (
+        master &&
+        master.dependency.condition({ value: slave[0].defaultValue })
+      ) {
+        category.properties[slave[1]].disabled = true;
+        category.properties[slave[1]].warning = master.dependency.description;
+      }
+    });
   });
 
   return categories;

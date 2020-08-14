@@ -1,0 +1,18 @@
+.textarea {
+  border: 1px solid var(--grey-89);
+  background-color: white;
+  border-radius: 3px;
+  padding: 0 1rem;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+  min-width: 400px;
+}
+
+.textarea:hover {
+  border-color: var(--grey-80);
+}
+
+.textarea:focus {
+  border-color: var(--orange);
+}

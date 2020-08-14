@@ -46,16 +46,17 @@ function Dropdown({ isVisible, onClose }) {
       <Select
         id="platform"
         defaultValue={platform}
+        options={[
+          "Spring Boot",
+          "Tomcat",
+          "Jboss/Wildfly",
+          "IBM Websphere",
+          "Oracle Weblogic",
+        ]}
         onChange={(evt) =>
           dispatch({ type: "SWITCH_PLATFORM", payload: evt.target.value })
         }
-      >
-        <option value="sprint-boot">Spring Boot</option>
-        <option value="tomcat">Tomcat</option>
-        <option value="jboss">Jboss/Wildfly</option>
-        <option value="websphere">IBM Websphere</option>
-        <option value="weblogic">Oracle Weblogic</option>
-      </Select>
+      />
 
       <label className="label">Layout:</label>
       <div className="radio-button-group">

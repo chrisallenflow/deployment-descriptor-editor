@@ -5,19 +5,6 @@ import "./Alert.css";
 
 function Alert({ message, variant, onClose }) {
   const [fadeOut, setFadeOut] = useState(false);
-  let timeout = null;
-
-  useEffect(() => {
-    if (variant === "error") {
-      return;
-    }
-
-    timeout = setTimeout(() => {
-      handleClose();
-    }, 5000);
-
-    return () => clearTimeout(timeout);
-  }, [message, variant]);
 
   const handleClose = () => {
     setFadeOut(true);
@@ -26,6 +13,18 @@ function Alert({ message, variant, onClose }) {
       onClose();
     }, 400);
   };
+  useEffect(() => {
+    if (variant === "error") {
+      return;
+    }
+
+    let timeout = setTimeout(() => {
+      handleClose();
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [message, variant]);
 
   return (
     <div

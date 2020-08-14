@@ -14,6 +14,7 @@ export default {
       type: "string",
       description: "Name of the process engine",
       defaultValue: "default",
+      depends: ["generate-unique-process-engine-name"],
     },
     {
       name: "generate-unique-process-engine-name",
@@ -62,6 +63,7 @@ export default {
         "Camunda history level to use when history-level is auto, but the level can not determined automatically",
       defaultValue: "FULL",
       options: ["FULL", "AUTO"],
+      depends: ["history-level"],
     },
     {
       name: "auto-deployment-enabled",

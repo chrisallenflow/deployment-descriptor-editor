@@ -2,11 +2,9 @@
   border: 1px solid var(--grey-89);
   background-color: white;
   border-radius: 3px;
-  padding: 0 1rem;
+  padding: 0 2rem 0 1rem;
   font-family: inherit;
   outline: none;
-  grid-column: 2 / 3;
-  min-width: 300px;
   box-sizing: border-box;
   height: 40px;
   appearance: none;

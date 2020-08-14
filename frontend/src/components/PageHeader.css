@@ -1,7 +1,30 @@
 .page-header {
-  margin: unset;
   padding: 1rem 2rem;
   background: transparent url(/orange-bg.svg) no-repeat center/cover;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-header > .title {
   font-size: 22px;
+  margin: unset;
+}
+
+.page-header > .link {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  outline: none;
+}
+
+.page-header > .link:hover,
+.page-header > .link:focus {
+  text-decoration: underline;
+}
+
+.page-header > .link > svg {
+  margin-left: 0.3rem;
 }

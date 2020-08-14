@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useState,
-  useRef,
-  useContext,
-  useCallback,
-} from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { parse, restify, updateDependencies } from "../utils/schema-converter";
 import FormHeader from "./FormHeader";
 import withAlert from "../hocs/with-alert";
@@ -42,14 +36,12 @@ function Form({ onAlert }) {
         setCategories(templates);
         rawCategories.current = templates;
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const propertyCount = useCallback(
-    (category) => {
-      return category.properties.filter((property) => !property.hidden).length;
-    },
-    [categories]
-  );
+  const propertyCount = (category) => {
+    return category.properties.filter((property) => !property.hidden).length;
+  };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
