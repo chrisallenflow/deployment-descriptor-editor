@@ -11,7 +11,10 @@
   <description>See readme</description>
 
   <properties>
+    <!-- EE version
     <camunda.version>7.13.3-ee</camunda.version>
+    -->
+    <camunda.version>7.13.0</camunda.version>
     <springBoot.version>2.3.2.RELEASE</springBoot.version>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
@@ -42,9 +45,16 @@
   <dependencies>
     <dependency>
       <groupId>org.camunda.bpm.springboot</groupId>
+      <artifactId>camunda-bpm-spring-boot-starter-webapp</artifactId>
+      <version>${camunda.version}</version>
+    </dependency>
+    <!-- EE version
+     <dependency>
+      <groupId>org.camunda.bpm.springboot</groupId>
       <artifactId>camunda-bpm-spring-boot-starter-webapp-ee</artifactId>
       <version>${camunda.version}</version>
     </dependency>
+    -->
 
     <dependency>
       <groupId>org.camunda.bpm.springboot</groupId>
@@ -149,17 +159,20 @@
   </dependencies>
 
   <repositories>
+    <!-- Open Source Version -      -->
     <repository>
       <id>camunda-bpm-nexus</id>
       <name>Camunda Maven Repository</name>
       <url>https://app.camunda.com/nexus/content/groups/public</url>
     </repository>
-    <!-- enable this for EE dependencies (requires credentials in ~/.m2/settings.xml) -->
+
+    <!-- enable this for EE dependencies (requires credentials in ~/.m2/settings.xml)
     <repository>
       <id>camunda-bpm-nexus-ee</id>
       <name>Camunda Enterprise Maven Repository</name>
       <url>https://app.camunda.com/nexus/content/repositories/camunda-bpm-ee</url>
     </repository>
+    -->
 
   </repositories>
 
